@@ -1,0 +1,27 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "Ecommerce App",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/app.js",
+    "dev": "NODE_ENV=DEVELOPMENT nodemon backend/app.js",
+    "prod": "NODE_ENV=PRODUCTION nodemon backend/app.js",
+    "seeder": "node backend/seeder/seeder.js"
+  },
+  "author": "Sentitemsu Jamir",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^2.4.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^6.6.0",
+    "nodemailer": "^6.9.14",
+    "stripe": "^16.7.0"
+  }
+}
