@@ -88,10 +88,6 @@ export const stripeWebhook = catchAsyncErrors(
         
             const signature = req.headers["stripe-signature"];
             const event = stripe.webhooks.constructEvent(req.rawBody, signature, process.env.STRIPE_WEBHOOK_SECRET);
-            console.log("Body".req.rawBody)
-            console.log("Signature :" ,signature)
-
-            console.log(process.env.STRIPE_WEBHOOK_SECRET)
 
             if (event.type==="checkout.session.completed"){
                 const session =event.data.object;
