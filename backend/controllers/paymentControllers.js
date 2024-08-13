@@ -1,7 +1,9 @@
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import Order from "../models/order.js"
 import Stripe from "stripe";
+import bodyParser from "body-parser";
 const stripe=Stripe(process.env.STRIPE_SECRET_KEY);
+
 
 
 
@@ -12,6 +14,7 @@ export const stripeCheckoutSession = catchAsyncErrors(
     async(req, res, next)=>{
 
         const body= req?.body
+        console.log("Request Body:", body);
 
         const line_items =body?.orderItems?.map((item)=>{
             return {
@@ -82,8 +85,9 @@ const getOrderItems = async (line_items)=>{
 export const stripeWebhook = catchAsyncErrors(
     async(req, res, next)=>{ 
         try {
+        
             const signature = req.headers["stripe-signature"];
-            const event = stripe.webhooks.constructEvent(req.rawbody, signature, process.env.STRIPE_WEBHOOK_SECRET);
+            const event = stripe.webhooks.constructEvent(req.rawBody, signature, process.env.STRIPE_WEBHOOK_SECRET);
             console.log("Body".req.rawBody)
             console.log("Signature :" ,signature)
 

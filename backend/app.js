@@ -7,8 +7,9 @@ import errorMiddleware from "./middlewares/error.js";
 import bodyParser from "body-parser";
 
 
-// Set up middleware to capture raw body
-app.use(bodyParser.raw({ type: 'application/json' }));
+// Middleware to parse raw body for Stripe webhook
+//app.use('/webhook/stripe', bodyParser.raw({ type: 'application/json' }));
+
 
 //Handle Uncaught exception
 process.on(`uncaughtException`, (err) => {
