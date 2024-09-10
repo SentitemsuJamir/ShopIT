@@ -209,10 +209,10 @@ export const updateProfile= catchAsyncErrors (async(req,res,next)=>{
 
 export const allUsers= catchAsyncErrors (async(req,res,next)=>{
 
-    const user= await User.find();
+    const users= await User.find();
 
     res.status(200).json({
-        user,
+        users,
     });
 })
 
@@ -256,7 +256,10 @@ export const deleteUsers= catchAsyncErrors (async(req,res,next)=>{
     if(!user){
         return next(new ErrorHandler(`Usert not found with id: ${req.params.id}`,404))
     }
-    //TODO- Remove user avatar from cloudinary
+    //remove user avatar from cloudinary
+    if(user?.avatar?.public_id){
+        await delete_file(user?.avatar?.public_id);
+    }
 
     await user.deleteOne();
     res.status(200).json({
